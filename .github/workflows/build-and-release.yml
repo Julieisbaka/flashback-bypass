@@ -52,7 +52,7 @@ jobs:
           fi
 
       - name: Upload JAR to release
-        uses: softprops/action-gh-release@v2@6cbd405e2c4e67a21c47fa9e383d020e4e28b836
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836
         if: |
           (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') || startsWith(github.ref, 'refs/tags/v')
         with:
