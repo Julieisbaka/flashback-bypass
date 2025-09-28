@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.julieisbaka.flashbackbypass.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "FlashbackMixin",
+    "C2MEChunkTaskSchedulerMixin",
+    "C2MERegionFileIOManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

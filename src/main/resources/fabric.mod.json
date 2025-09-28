@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "flashback_bypass",
+  "version": "${version}",
+  "name": "Flashback Bypass",
+  "description": "Allows Flashback replays to open even when the C2ME optimization mod is installed.",
+  "authors": [
+    "JulieISBaka"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.julieisbaka.flashbackbypass.FlashbackBypassClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.17.2",
+    "minecraft": "~1.21.1",
+    "fabric-api": "*",
+    "flashback": "*"
+  },
+  "suggests": {
+    "c2me": "*"
+  },
+  "mixins": [
+    "flashback_bypass.mixins.json"
+  ],
+  "contact": {
+    "sources": "https://example.com"
+  },
+  "license": "MIT"
+}

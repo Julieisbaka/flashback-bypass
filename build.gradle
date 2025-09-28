@@ -1,0 +1,60 @@
+plugins {
+	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		name = "Fabric"
+		url = 'https://maven.fabricmc.net/'
+	}
+	maven {
+		name = "Modrinth"
+		url = 'https://api.modrinth.com/maven'
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${minecraft_version}"
+	mappings loom.yarnMappings("${yarn_mappings}")
+	modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+	modCompileOnly fileTree(dir: "libs", include: ["*.jar"])
+	modRuntimeOnly fileTree(dir: "libs", include: ["*.jar"])
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+java {
+	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_21
+
+	oolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_" + project.archivesBaseName }
+	}
+}

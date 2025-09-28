@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.c2meflashbackbypass.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "FlashbackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

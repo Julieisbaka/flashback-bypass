@@ -1,0 +1,15 @@
+.gradle/
+build/
+run/
+.gradle-cache/
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.log
+*.tmp
+*.lock
+out/
+**/Thumbs.db
+**/.DS_Store
