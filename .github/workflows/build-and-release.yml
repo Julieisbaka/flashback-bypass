@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (e.g. v0.0.1)'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -31,10 +36,23 @@ jobs:
           JAR=$(find build/libs -name '*.jar' | head -n 1)
           echo "jar_path=$JAR" >> $GITHUB_OUTPUT
 
+      - name: Create tag if needed (manual dispatch)
+        if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git fetch --tags
+          if ! git rev-parse ${{ inputs.release_tag }} >/dev/null 2>&1; then
+            git tag ${{ inputs.release_tag }}
+            git push origin ${{ inputs.release_tag }}
+          fi
+
       - name: Upload JAR to release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: |
+          (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') || startsWith(github.ref, 'refs/tags/v')
         with:
           files: ${{ steps.find_jar.outputs.jar_path }}
+          tag_name: ${{ inputs.release_tag != '' && inputs.release_tag || github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
