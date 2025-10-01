@@ -27,7 +27,7 @@ dependencies {
 	mappings loom.yarnMappings("${yarn_mappings}")
 	modImplementation "net.fabricmc:fabric-loader:${loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
 
 	modCompileOnly fileTree(dir: "libs", include: ["*.jar"])
 	modRuntimeOnly fileTree(dir: "libs", include: ["*.jar"])
